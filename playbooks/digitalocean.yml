@@ -1,0 +1,21 @@
+---
+  - hosts: cloud
+    become: true
+    tasks:
+      - name: stop all hosts
+        digital_ocean:
+          name={{item}}
+          state=present
+          api_token=926b4fa8060bedc1bc42a0b1da617b52c690d5eac0bec06aae2f544aa9cbb20b
+        with_items:
+          - lb001-ubuntu
+
+
+#  - digital_ocean:
+#      state: present
+#      ssh_key_ids: st3
+#      name: mydroplet1
+#      api_token: 926b4fa8060bedc1bc42a0b1da617b52c690d5eac0bec06aae2f544aa9cbb20b
+#      size_id: 2gb
+#      region_id: ams2
+#      image_id: ubuntu-16-x64

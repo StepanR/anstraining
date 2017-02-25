@@ -1,0 +1,29 @@
+---
+# Stop stack
+  - hosts: lb
+    tasks:
+      - name: stop lb
+        service: name=nginx state=stopped
+
+  - hosts: web
+    tasks:
+      - name: stop web
+        service: name=apache2 state=stopped
+
+# Reboot DB
+  - hosts: db
+    tasks:
+      - name: reboot db
+        service: name=mysql state=restarted
+
+# Dring stack up
+
+  - hosts: web
+    tasks:
+      - name: start web
+        service: name=apache2 state=started
+
+  - hosts: lb
+    tasks:
+      - name: start lb
+        service: name=nginx state=started

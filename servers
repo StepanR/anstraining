@@ -1,0 +1,20 @@
+[lb]
+lb01 ansible_host=178.62.60.229 ansible_user=root
+
+[web]
+# app01
+178.62.23.148 ansible_user=root
+# app02
+178.62.55.51 ansible_user=root
+
+[db]
+db01 ansible_host=138.197.132.70 ansible_user=root
+
+[control]
+control ansible_connection=local
+
+[cloud]
+lb01
+app01
+app02
+db01
