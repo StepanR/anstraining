@@ -12,7 +12,7 @@
       - name: ensure mySQL started
         service: name=mysql state=started enabled=yes
 
-      - name: ensure mysqld gruop is present
+      - name: ensure mysqld group is present
         lineinfile: dest=/etc/mysql/my.cnf line=[mysqld] state=present
         notify: restart mysql
 

@@ -25,3 +25,14 @@
 
       - name: verify mysql port
         wait_for: port=3306 timeout=1
+
+  - hosts: lb
+    tasks:
+      - name: verify backends response
+        uri: url=http://app01 return_content=yes
+        #with_items: groups.web
+        register: web_index
+
+      - fail: msg="index failed to return content"
+        when: "'Hello, from sunny' not in web_index.content"
+        #with_items: "{{web_index.results}}"
