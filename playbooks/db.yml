@@ -1,32 +1,5 @@
 ---
   - hosts: db
     become: true
-    tasks:
-
-      - name: install mySQL
-        apt: name={{item}} state=present update_cache=yes
-        with_items:
-          - mysql-server
-          - python-mysqldb
-
-      - name: ensure mySQL started
-        service: name=mysql state=started enabled=yes
-
-      - name: ensure mysqld group is present
-        lineinfile: dest=/etc/mysql/my.cnf line=[mysqld] state=present
-        notify: restart mysql
-
-      - name: ensure mySQL listenig on all ports
-        lineinfile: dest=/etc/mysql/my.cnf insertafter=^[mysqld] regexp=^bind-address line="bind-address = 0.0.0.0"
-        notify: restart mysql
-
-      - name: create Demo  DB
-        mysql_db: name=demo state=present
-
-      - name: add demo db_user
-        mysql_user: name=demo password=demo priv=demo.*:ALL host='%' state=present
-
-
-    handlers:
-      - name: restart mysql
-        service: name=mysql state=restarted
+    roles:
+      - mysql
