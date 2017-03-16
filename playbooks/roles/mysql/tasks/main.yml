@@ -10,7 +10,7 @@
         notify: restart mysql
 
       - name: ensure mySQL listenig on all ports
-        lineinfile: dest=/etc/mysql/my.cnf insertafter=^[mysqld] regexp=^bind-address line="bind-address = 0.0.0.0"
+        lineinfile: dest=/etc/mysql/my.cnf insertafter=^[mysqld] regexp=^bind-address line="bind-address = {{ ansible_eth0.ipv4.address }}"
         notify: restart mysql
 
       - name: ensure mySQL started
